@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Courses — Prestige Student Portal</title>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="./css/style.css">
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js" defer></script>
+    <script src="./js/nav.js" defer></script>
+</head>
+<body>
+    <script>
+        if (localStorage.getItem("isLoggedIn") !== "true") {
+            alert("Access Denied! Please log in to view enrolled courses.");
+            window.location.href = "portal.html";
+        }
+    </script>
+
+    <main>
+        <header class="site-header row">
+            <a href="portal.html" class="logo">
+                <img src="./images/prestige pic.jpg" alt="Prestige Coding Technology logo">
+            </a>
+            <nav id="nav" class="site-nav">
+                <ul class="row">
+                    <li><a href="portal.html">Home</a></li>
+                    <li><a href="index.html">Dashboard</a></li>
+                    <li><a href="courses.html" class="active">Courses</a></li>
+                    <li><a href="calendar.html">Calendar</a></li>
+                    <li><a href="resources.html">Resources</a></li>
+                    <li><a href="login.html" id="auth-btn">Log In</a></li>
+                </ul>
+            </nav>
+            <button id="menu" aria-label="Toggle menu"><i class="fa-solid fa-bars"></i></button>
+        </header>
+
+        <div class="page-head">
+            <h1>My Courses</h1>
+            <p id="courses-subtitle">Track your progress across every enrolled course.</p>
+        </div>
+
+        <section class="courses-section">
+            <div class="courses row" id="courses-grid">
+                
+                <div class="course" data-course-name="Web Development" data-aos="fade-up">
+                    <div class="course-details row">
+                        <i class="fa-solid fa-code course-icon"></i>
+                        <p>Web Development</p>
+                    </div>
+                    <input type="range" value="80" aria-label="Web Development progress">
+                    <p>Progress 80%</p>
+                </div>
+
+                <div class="course" data-course-name="Data Science" data-aos="fade-up" data-aos-delay="100">
+                    <div class="course-details row">
+                        <i class="fa-solid fa-database course-icon"></i>
+                        <p>Data Science</p>
+                    </div>
+                    <input type="range" value="30" aria-label="Data Science progress">
+                    <p>Progress 30%</p>
+                </div>
+
+                <div class="course3" data-course-name="Machine Learning" data-aos="fade-up" data-aos-delay="200">
+                    <div class="course-details3 row">
+                        <i class="fa-solid fa-robot course-icon alt"></i>
+                        <p>Machine Learning</p>
+                    </div>
+                    <input type="range" value="70" aria-label="Machine Learning progress">
+                    <p>Progress 70%</p>
+                </div>
+
+                <div class="course" data-course-name="Mobile Development" data-aos="fade-up">
+                    <div class="course-details row">
+                        <i class="fa-solid fa-mobile-screen course-icon"></i>
+                        <p>Mobile Development</p>
+                    </div>
+                    <input type="range" value="55" aria-label="Mobile Development progress">
+                    <p>Progress 55%</p>
+                </div>
+
+                <div class="course" data-course-name="Cloud Computing" data-aos="fade-up" data-aos-delay="100">
+                    <div class="course-details row">
+                        <i class="fa-solid fa-cloud course-icon"></i>
+                        <p>Cloud Computing</p>
+                    </div>
+                    <input type="range" value="40" aria-label="Cloud Computing progress">
+                    <p>Progress 40%</p>
+                </div>
+
+                <div class="course" data-course-name="Cyber Security" data-aos="fade-up" data-aos-delay="200">
+                    <div class="course-details row">
+                        <i class="fa-solid fa-shield-halved course-icon"></i>
+                        <p>Cyber Security</p>
+                    </div>
+                    <input type="range" value="20" aria-label="Cyber Security progress">
+                    <p>Progress 20%</p>
+                </div>
+
+            </div>
+        </section>
+
+        <div class="support">
+            <h1>Ready for more?</h1>
+            <p><span>Keep building.</span> Continue where you left off on your dashboard.</p>
+            <a href="index.html" class="active">Go to Dashboard</a>
+        </div>
+
+        <footer>
+            <p>&copy; 2026 Prestige Coding Technology Ltd. All Rights Reserved.</p>
+        </footer>
+    </main>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const authBtn = document.getElementById("auth-btn");
+            const coursesSubtitle = document.getElementById("courses-subtitle");
+            const userRole = localStorage.getItem("userRole") || "student";
+
+            // 1. Log In / Log Out Navigation Text Switching Logic
+            if (authBtn) {
+                authBtn.textContent = "Log Out";
+                authBtn.href = "#";
+                authBtn.addEventListener("click", (e) => {
+                    e.preventDefault();
+                    localStorage.removeItem("isLoggedIn");
+                    localStorage.removeItem("userRole");
+                    alert("Logged out successfully.");
+                    window.location.href = "portal.html";
+                });
+            }
+
+            // 2. Dynamic Course Filter Engine (Displays only selected courses for students)
+            if (userRole === "student") {
+                const registeredCoursesData = localStorage.getItem("registeredCourses");
+                
+                if (registeredCoursesData) {
+                    const enrolledList = JSON.parse(registeredCoursesData);
+                    const courseCards = document.querySelectorAll("#courses-grid > div");
+                    
+                    courseCards.forEach(card => {
+                        const name = card.getAttribute("data-course-name");
+                        // If student did not pick this course, hide it completely
+                        if (!enrolledList.includes(name)) {
+                            card.style.display = "none";
+                        }
+                    });
+                    coursesSubtitle.textContent = `Displaying your ${enrolledList.length} customized registration modules.`;
+                }
+            } else if (userRole === "tutor") {
+                // If logged in as tutor, display all courses for broad oversight
+                coursesSubtitle.textContent = "Overview Mode: Displaying all curriculum training fields.";
+            }
+        });
+    </script>
+</body>
+</html>

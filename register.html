@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prestige Student Portal — Register</title>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="./css/style.css">
+    <style>
+        .register-section {
+            padding: 60px 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 80vh;
+        }
+        label{
+            color: #000;
+        }
+        .form-container {
+            background: #fff;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            max-width: 500px;
+            width: 100%;
+        }
+        .form-container h2 {
+            margin-bottom: 10px;
+            font-size: 2rem;
+            color: #000;
+        }
+        .form-container p {
+            color: #000;
+            margin-bottom: 25px;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+        .form-group input, .form-group select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            font-size: 1rem;
+            outline: none;
+            transition: 0.3s;
+        }
+        .form-group input:focus, .form-group select:focus {
+            border-color: #4caf50;
+        }
+        /* Custom layout for the passport file picker */
+        .form-group input[type="file"] {
+            padding: 8px;
+            background: #fafafa;
+            cursor: pointer;
+        }
+        .courses-selection-box {
+            background: #f9f9f9;
+            padding: 15px;
+            border-radius: 8px;
+            border: 1px solid #eee;
+        }
+        .course-checkbox-label {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 10px;
+            cursor: pointer;
+            font-weight: 500 !important;
+        }
+        .course-checkbox-label input {
+            width: auto;
+        }
+        .submit-btn {
+            width: 100%;
+            padding: 14px;
+            background: #4caf50;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .submit-btn:hover {
+            background: #439a46;
+        }
+        .form-footer {
+            margin-top: 20px;
+            text-align: center;
+        }
+        .form-footer a {
+            color: #4caf50;
+            text-decoration: none;
+            font-weight: bold;
+        }
+    </style>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js" defer></script>
+    <script src="./js/nav.js" defer></script>
+</head>
+<body>
+    <main>
+        <header class="site-header row">
+            <a href="portal.html" class="logo">
+                Sam <span>Dev</span>
+            </a>
+            <nav id="nav" class="site-nav">
+                <ul class="row">
+                    <li><a href="portal.html">Home</a></li>
+                    <li><a href="index.html" class="protected-link">Dashboard</a></li>
+                    <li><a href="courses.html" class="protected-link">Courses</a></li>
+                    <li><a href="calendar.html" class="protected-link">Calendar</a></li>
+                    <li><a href="resources.html" class="protected-link">Resources</a></li>
+                    <li><a href="login.html" id="auth-btn">Log In</a></li>
+                </ul>
+            </nav>
+            <button id="menu" aria-label="Toggle menu"><i class="fa-solid fa-bars"></i></button>
+        </header>
+
+        <section class="register-section" data-aos="fade-up">
+            <div class="form-container">
+                <h2>Create Account</h2>
+                <p>Join the learning hub and set up your student profile.</p>
+                
+                <form id="register-form">
+                    <div class="form-group">
+                        <label for="fullname">Full Name</label>
+                        <input type="text" id="fullname" placeholder="John Doe" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">Email Address</label>
+                        <input type="email" id="email" placeholder="john@example.com" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="passport">Upload Passport Photograph</label>
+                        <input type="file" id="passport" accept="image/*" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <input type="password" id="password" placeholder="••••••••" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="role">Register As:</label>
+                        <select id="role" required>
+                            <option value="student">Student</option>
+                            <option value="tutor">Tutor</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Select Your Courses (Pick up to 3):</label>
+                        <div class="courses-selection-box">
+                            <label class="course-checkbox-label">
+                                <input type="checkbox" name="course" value="Web Development" class="course-checkbox"> Web Development
+                            </label>
+                            <label class="course-checkbox-label">
+                                <input type="checkbox" name="course" value="Data Science" class="course-checkbox"> Data Science
+                            </label>
+                            <label class="course-checkbox-label">
+                                <input type="checkbox" name="course" value="Machine Learning" class="course-checkbox"> Machine Learning
+                            </label>
+                            <label class="course-checkbox-label">
+                                <input type="checkbox" name="course" value="Cyber Security" class="course-checkbox"> Cyber Security
+                            </label>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="submit-btn">Complete Registration</button>
+                </form>
+
+                <div class="form-footer">
+                    <p>Already have an account? <a href="login.html">Log In here</a></p>
+                </div>
+            </div>
+        </section>
+
+        <footer>
+            <p>&copy; 2026 Sam <span>Dev</span> Ltd. All Rights Reserved.</p>
+        </footer>
+    </main>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const checkboxes = document.querySelectorAll('.course-checkbox');
+            const maxAllowed = 3;
+
+            checkboxes.forEach(checkbox => {
+                checkbox.addEventListener('change', () => {
+                    const selectedCourses = document.querySelectorAll('.course-checkbox:checked');
+                    if (selectedCourses.length > maxAllowed) {
+                        checkbox.checked = false;
+                        alert("Enrollment Limit: You can select a maximum of 3 courses only.");
+                    }
+                });
+            });
+
+            document.getElementById("register-form").addEventListener("submit", (e) => {
+                e.preventDefault();
+                
+                const fullname = document.getElementById("fullname").value;
+                const role = document.getElementById("role").value;
+                const passportFile = document.getElementById("passport").files[0];
+                
+                const selectedCourses = [];
+                document.querySelectorAll('.course-checkbox:checked').forEach(box => {
+                    selectedCourses.push(box.value);
+                });
+
+                if (selectedCourses.length === 0) {
+                    alert("Please select at least one course to complete registration.");
+                    return;
+                }
+
+                // Processing image to Base64 String format for Storage
+                if (passportFile) {
+                    const reader = new FileReader();
+                    reader.onload = function(event) {
+                        const base64Image = event.target.result;
+                        
+                        // Save all user properties to client local state persistence
+                        localStorage.setItem("isLoggedIn", "true");
+                        localStorage.setItem("userFullName", fullname);
+                        localStorage.setItem("userRole", role);
+                        localStorage.setItem("userAvatar", base64Image);
+                        localStorage.setItem("registeredCourses", JSON.stringify(selectedCourses));
+
+                        alert(`Account registered successfully as ${fullname}! Welcome to Prestige Portal.`);
+                        window.location.href = "index.html";
+                    };
+                    reader.readAsDataURL(passportFile);
+                }
+            });
+        });
+    </script>
+</body>
+</html>

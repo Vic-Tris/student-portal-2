@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calendar — Prestige Student Portal</title>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="./css/style.css">
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js" defer></script>
+    <script src="./js/nav.js" defer></script>
+</head>
+<body>
+    <script>
+        if (localStorage.getItem("isLoggedIn") !== "true") {
+            alert("Access Denied! Please log in to view the portal calendar.");
+            window.location.href = "portal.html";
+        }
+    </script>
+
+    <main>
+        <header class="site-header row">
+            <a href="portal.html" class="logo">
+                <img src="./images/prestige pic.jpg" alt="Prestige Coding Technology logo">
+            </a>
+            <nav id="nav" class="site-nav">
+                <ul class="row">
+                    <li><a href="portal.html">Home</a></li>
+                    <li><a href="index.html">Dashboard</a></li>
+                    <li><a href="courses.html">Courses</a></li>
+                    <li><a href="calendar.html" class="active">Calendar</a></li>
+                    <li><a href="resources.html">Resources</a></li>
+                    <li><a href="login.html" id="auth-btn">Log In</a></li>
+                </ul>
+            </nav>
+            <button id="menu" aria-label="Toggle menu"><i class="fa-solid fa-bars"></i></button>
+        </header>
+
+        <div class="page-head">
+            <h1>Calendar &amp; Events</h1>
+            <p>Your upcoming classes, webinars and deadlines.</p>
+        </div>
+
+        <section class="event-section">
+            <div class="event-container">
+                <div class="events event-box" data-aos="fade-up">
+                    <h1>This Term</h1>
+                    <div class="event row">
+                        <div class="event-day">
+                            <p>July</p>
+                            <p>31</p>
+                        </div>
+                        <div class="event-details">
+                            <p class="event-title">Coding Webinar</p>
+                            <p class="event-time"><span>10:00 AM</span> <span>Online</span></p>
+                        </div>
+                    </div>
+                    <div class="event row">
+                        <div class="event-day">
+                            <p>Aug.</p>
+                            <p>21</p>
+                        </div>
+                        <div class="event-details">
+                            <p class="event-title">Project Presentation</p>
+                            <p class="event-time"><span>12:00 PM</span> <span>Zoom</span></p>
+                        </div>
+                    </div>
+                    <div class="event row">
+                        <div class="event-day">
+                            <p>Sept.</p>
+                            <p>21</p>
+                        </div>
+                        <div class="event-details">
+                            <p class="event-title">Final Exam</p>
+                            <p class="event-time"><span>07:00 PM</span> <span>Meet</span></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="events event-box" data-aos="fade-up" data-aos-delay="100">
+                    <h1>Live Classes</h1>
+                    <div class="event row">
+                        <div class="event-day">
+                            <p>Apr.</p>
+                            <p>24</p>
+                        </div>
+                        <div class="event-details">
+                            <p class="event-title">Introduction to Computer Science</p>
+                            <p class="event-time"><span>10:00 AM</span> <span>Dr. Smith</span></p>
+                        </div>
+                    </div>
+                    <div class="event row">
+                        <div class="event-day">
+                            <p>Apr.</p>
+                            <p>26</p>
+                        </div>
+                        <div class="event-details">
+                            <p class="event-title">Algorithms Workshop</p>
+                            <p class="event-time"><span>02:00 PM</span> <span>Online</span></p>
+                        </div>
+                    </div>
+                    <div class="event row">
+                        <div class="event-day">
+                            <p>May</p>
+                            <p>03</p>
+                        </div>
+                        <div class="event-details">
+                            <p class="event-title">Data Structures Q&amp;A</p>
+                            <p class="event-time"><span>11:00 AM</span> <span>Meet</span></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="support">
+            <h1>Need to join a session?</h1>
+            <p><span>Live classes</span> open 10 minutes before the scheduled time.</p>
+            <a href="index.html" id="dashboard-redirect-btn" class="active">Open Dashboard</a>
+        </div>
+
+        <footer>
+            <p>&copy; 2026 Prestige Coding Technology Ltd. All Rights Reserved.</p>
+        </footer>
+    </main>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const authBtn = document.getElementById("auth-btn");
+            const dashboardRedirectBtn = document.getElementById("dashboard-redirect-btn");
+
+            // 1. Dynamic Log Out Switcher
+            if (authBtn) {
+                authBtn.textContent = "Log Out";
+                authBtn.href = "#";
+                authBtn.addEventListener("click", (e) => {
+                    e.preventDefault();
+                    localStorage.removeItem("isLoggedIn");
+                    localStorage.removeItem("userRole");
+                    alert("Logged out successfully.");
+                    window.location.href = "portal.html";
+                });
+            }
+
+            // 2. Activity Progress Sync Integration
+            if (dashboardRedirectBtn) {
+                dashboardRedirectBtn.addEventListener("click", () => {
+                    let completedClicks = parseInt(localStorage.getItem("completedActivitiesCount")) || 1;
+                    if (completedClicks < 5) {
+                        completedClicks++;
+                        localStorage.setItem("completedActivitiesCount", completedClicks);
+                    }
+                });
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prestige Student Portal — Home</title>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="./css/style.css">
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js" defer></script>
+    <script src="./js/nav.js" defer></script>
+</head>
+<body>
+    <main>
+        <header class="site-header row">
+            <a href="portal.html" class="logo">
+                Sam <span>Dev</span>
+            </a>
+            <nav id="nav" class="site-nav">
+                <ul class="row">
+                    <li><a href="portal.html" class="active">Home</a></li>
+                    <li><a href="index.html" class="protected-link">Dashboard</a></li>
+                    <li><a href="courses.html" class="protected-link">Courses</a></li>
+                    <li><a href="calendar.html" class="protected-link">Calendar</a></li>
+                    <li><a href="resources.html" class="protected-link">Resources</a></li>
+                    <li><a href="login.html" id="auth-btn">Log In</a></li>
+                </ul>
+            </nav>
+            <button id="menu" aria-label="Toggle menu"><i class="fa-solid fa-bars"></i></button>
+        </header>
+
+        <section class="hero">
+            <div class="hero_content row">
+                <div class="hero_message">
+                    <h1 id="greeting">Welcome To Your Learning Hub</h1>
+                    <p>Empowering the next generation of developers and tech leaders.</p>
+                    <a href="index.html" class="active protected-link">Continue Learning</a>
+                </div>
+                <div class="hero-image">
+                    <img src="./images/man with laptop 2.png" alt="Student learning with a laptop">
+                </div>
+            </div>
+        </section>
+
+        <section class="courses-section">
+            <h1>My Courses</h1>
+            <div class="courses row">
+                <div class="course" data-aos="fade-right">
+                    <div class="course-details row">
+                        <i class="fa-solid fa-code course-icon"></i>
+                        <p>Web Development</p>
+                    </div>
+                    <input type="range" value="80" aria-label="Web Development progress">
+                    <p>Progress 80%</p>
+                </div>
+                <div class="course" data-aos="fade-up">
+                    <div class="course-details row">
+                        <i class="fa-solid fa-database course-icon"></i>
+                        <p>Data Science</p>
+                    </div>
+                    <input type="range" value="30" aria-label="Data Science progress">
+                    <p>Progress 30%</p>
+                </div>
+                <div class="course3" data-aos="fade-left">
+                    <div class="course-details3 row">
+                        <i class="fa-solid fa-robot course-icon alt"></i>
+                        <p>Machine Learning</p>
+                    </div>
+                    <input type="range" value="70" aria-label="Machine Learning progress">
+                    <p>Progress 70%</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="event-section">
+            <h1>Upcoming Events</h1>
+            <div class="event-container">
+                <div class="events event-box">
+                    <div class="event row">
+                        <div class="event-day">
+                            <p>July</p>
+                            <p>31</p>
+                        </div>
+                        <div class="event-details">
+                            <p class="event-title">Coding Webinar</p>
+                            <p class="event-time"><span>10:00 AM</span> <span>Online</span></p>
+                        </div>
+                    </div>
+                    <div class="event row">
+                        <div class="event-day">
+                            <p>Aug.</p>
+                            <p>21</p>
+                        </div>
+                        <div class="event-details">
+                            <p class="event-title">Project Presentation</p>
+                            <p class="event-time"><span>12:00 PM</span> <span>Zoom</span></p>
+                        </div>
+                    </div>
+                    <div class="event row">
+                        <div class="event-day">
+                            <p>Sept.</p>
+                            <p>21</p>
+                        </div>
+                        <div class="event-details">
+                            <p class="event-title">Final Exam</p>
+                            <p class="event-time"><span>07:00 PM</span> <span>Meet</span></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="others event-box">
+                    <a class="recordings protected-link" href="resources.html#recordings">
+                        <i class="fa-solid fa-video"></i>
+                        <p>Lecture Recordings</p>
+                    </a>
+                    <a class="recordings protected-link" href="resources.html#assignments">
+                        <i class="fa-solid fa-file-pen"></i>
+                        <p>Assignments</p>
+                    </a>
+                    <a class="recordings protected-link" href="resources.html#forum">
+                        <i class="fa-solid fa-comments"></i>
+                        <p>Discussion Forum</p>
+                    </a>
+                    <a class="recordings protected-link" href="resources.html#faq">
+                        <i class="fa-solid fa-circle-question"></i>
+                        <p>FAQ</p>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <div class="support">
+            <h1>Support</h1>
+            <p><span>Need help?</span> Reach out to your mentor or our support team.</p>
+            <a href="contact.html" class="active">Contact Support</a>
+        </div>
+
+        <footer>
+            <p>&copy; 2026 Sam <span>Dev</span> Ltd. All Rights Reserved.</p>
+        </footer>
+    </main>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const isLoggedIn = localStorage.getItem("isLoggedIn") === "true";
+            const userRole = localStorage.getItem("userRole");
+            const authBtn = document.getElementById("auth-btn");
+            const greeting = document.getElementById("greeting");
+
+            // 1. Dynamic Log In / Log Out Toggle 
+            if (isLoggedIn && authBtn) {
+                authBtn.textContent = "Log Out";
+                authBtn.href = "#";
+                authBtn.addEventListener("click", (e) => {
+                    e.preventDefault();
+                    localStorage.removeItem("isLoggedIn");
+                    localStorage.removeItem("userRole");
+                    alert("Logged out successfully.");
+                    window.location.reload();
+                });
+
+                // Personalize header if someone is logged in
+                if (userRole && greeting) {
+                    greeting.textContent = `Welcome Back, ${userRole.charAt(0).toUpperCase() + userRole.slice(1)}!`;
+                }
+            }
+
+            // 2. Intercept protected dashboard routes if unauthenticated
+            document.body.addEventListener("click", (e) => {
+                const targetLink = e.target.closest(".protected-link");
+                if (targetLink && !isLoggedIn) {
+                    e.preventDefault();
+                    alert("Access Denied! Please log in to your account first to access this page.");
+                }
+            });
+        });
+    </script>
+</body>
+</html>

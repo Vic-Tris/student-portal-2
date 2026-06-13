@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Dashboard</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="./css/style.css">
+    <style>
+        .dashboard-progress-container {
+            background: #fff;
+            padding: 15px 25px;
+            border-radius: 8px;
+            margin: 20px auto;
+            max-width: 1200px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+        }
+        .progress-meta {
+            font-weight: 600;
+            color: #333;
+            min-width: 180px;
+        }
+        .progress-wrapper {
+            flex-grow: 1;
+            position: relative;
+        }
+        progress {
+            width: 100%;
+            height: 16px;
+            border-radius: 10px;
+            appearance: none;
+            -webkit-appearance: none;
+        }
+        progress::-webkit-progress-bar {
+            background-color: #e0e0e0;
+            border-radius: 10px;
+        }
+        progress::-webkit-progress-value {
+            background-color: #4caf50;
+            border-radius: 10px;
+            transition: width 0.4s ease;
+        }
+        #progress-percentage {
+            font-weight: bold;
+            color: #4caf50;
+            min-width: 50px;
+            text-align: right;
+        }
+        /* Custom image handler wrapper layout container */
+        .dash-profile-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .user-passport-frame {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid #4caf50;
+            background-color: #eee;
+        }
+        .user-passport-icon {
+            font-size: 1.8rem;
+        }
+    </style>
+    <script src="./js/nav.js" defer></script>
+</head>
+<body>
+    <script>
+        if (localStorage.getItem("isLoggedIn") !== "true") {
+            alert("Access Denied! Please log in to view your dashboard portal.");
+            window.location.href = "portal.html";
+        }
+    </script>
+
+    <main>
+        <header class="site-header row">
+            <a href="portal.html" class="logo">
+                Sam <span>Dev</span>
+            </a>
+            <nav id="nav" class="site-nav">
+                <ul class="row">
+                    <li><a href="portal.html">Home</a></li>
+                    <li><a href="index.html" class="active">Dashboard</a></li>
+                    <li><a href="courses.html">Courses</a></li>
+                    <li><a href="calendar.html">Calendar</a></li>
+                    <li><a href="resources.html">Resources</a></li>
+                    <li><a href="login.html" id="auth-btn">Log In</a></li>
+                </ul>
+            </nav>
+            <button id="menu" aria-label="Toggle menu"><i class="fa-solid fa-bars"></i></button>
+        </header>
+
+        <div class="dash-bar row">
+            <div class="dash-user">
+                <i class="fa-solid fa-gauge-high icon"></i>
+                <h1 id="dashboard-title">Student Tech Dashboard</h1>
+            </div>
+            <div class="dash-user dash-profile-wrapper">
+                <h1 id="user-display-name">Guest User</h1>
+                <div id="avatar-container">
+                    <i class="fa-solid fa-user icon user-passport-icon"></i>
+                </div>
+            </div>
+        </div>
+
+        <div class="dashboard-progress-container">
+            <div class="progress-meta">
+                <i class="fa-solid fa-chart-line"></i> Class Activity Progress:
+            </div>
+            <div class="progress-wrapper">
+                <progress id="portal-activity-progress" value="20" max="100"></progress>
+            </div>
+            <div id="progress-percentage">20%</div>
+        </div>
+
+        <div class="dash-grid">
+            <aside class="dash-sidebar">
+                <h2><a href="index.html">Dashboard</a></h2>
+                <p><a href="#live">Live Class Link</a></p>
+                <p><a href="#materials">Lecture Materials</a></p>
+                <p><a href="#videos">Recorded Videos</a></p>
+                <p><a href="resources.html">All Resources</a></p>
+            </aside>
+
+            <section class="dash-main">
+                <h1 id="live">Join Live Class</h1>
+                <div class="panel join">
+                    <h2>Introduction to Computer Science</h2>
+                    <p>Dr. Smith</p>
+                    <div class="meta-row">
+                        <p>April 24, 10:00 AM</p>
+                        <a href="calendar.html" class="view sync-activity">Join Meeting</a>
+                    </div>
+                </div>
+
+                <h1 id="materials">Lecture Materials</h1>
+                <div class="panel">
+                    <div class="lecture-item">
+                        <h2>Lecture 1: Basics of Programming</h2>
+                        <div class="meta-row">
+                            <p>Introduction to programming concepts</p>
+                            <div class="pdf"><span>PDF</span> <a href="resources.html#recordings" class="view sync-activity">View</a></div>
+                        </div>
+                    </div>
+                    <div class="lecture-item">
+                        <h2>Lecture 2: Algorithms</h2>
+                        <div class="meta-row">
+                            <p>Overview of algorithms and their types</p>
+                            <div class="pdf"><span>PDF</span> <a href="resources.html#recordings" class="view sync-activity">View</a></div>
+                        </div>
+                    </div>
+                </div>
+
+                <h1 id="videos">Recorded Videos</h1>
+                <div class="panel">
+                    <div class="meta-row">
+                        <p>Data Structures Overview</p>
+                        <p>April 20</p>
+                        <a href="resources.html#recordings" class="view sync-activity">Watch Video</a>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <footer>
+            <p>&copy; 2026 Sam <span>Dev</span> Ltd. All Rights Reserved.</p>
+        </footer>
+    </main>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const authBtn = document.getElementById("auth-btn");
+            const userDisplayName = document.getElementById("user-display-name");
+            const dashboardTitle = document.getElementById("dashboard-title");
+            const avatarContainer = document.getElementById("avatar-container");
+
+            const savedName = localStorage.getItem("userFullName");
+            const savedAvatar = localStorage.getItem("userAvatar");
+            const userRole = localStorage.getItem("userRole") || "student";
+
+            if (authBtn) {
+                authBtn.textContent = "Log Out";
+                authBtn.href = "#";
+                authBtn.addEventListener("click", (e) => {
+                    e.preventDefault();
+                    localStorage.clear(); // Clear all data on logout safely
+                    alert("Logged out successfully.");
+                    window.location.href = "portal.html";
+                });
+            }
+
+            // Render custom Full Name from registration file data
+            if (userDisplayName && savedName) {
+                userDisplayName.textContent = savedName;
+            } else {
+                userDisplayName.textContent = userRole === "tutor" ? "Instructor Node" : "Active Student";
+            }
+            
+            // Render Passport image asset from registration file data if it exists
+            if (avatarContainer && savedAvatar) {
+                avatarContainer.innerHTML = `<img src="${savedAvatar}" alt="User Passport Photograph" class="user-passport-frame">`;
+            }
+
+            if (dashboardTitle) {
+                const standardizedRole = userRole.charAt(0).toUpperCase() + userRole.slice(1);
+                dashboardTitle.textContent = `${standardizedRole} Portal Center`;
+            }
+
+            const progressBar = document.getElementById("portal-activity-progress");
+            const progressPercentageText = document.getElementById("progress-percentage");
+
+            let completedClicks = parseInt(localStorage.getItem("completedActivitiesCount")) || 1;
+            const totalRequiredClicks = 5; 
+
+            function refreshProgressBarView() {
+                const percentage = Math.min(Math.round((completedClicks / totalRequiredClicks) * 100), 100);
+                if (progressBar && progressPercentageText) {
+                    progressBar.value = percentage;
+                    progressPercentageText.textContent = `${percentage}%`;
+                }
+            }
+
+            document.querySelectorAll(".sync-activity").forEach(btn => {
+                btn.addEventListener("click", () => {
+                    if (completedClicks < totalRequiredClicks) {
+                        completedClicks++;
+                        localStorage.setItem("completedActivitiesCount", completedClicks);
+                        refreshProgressBarView();
+                    }
+                });
+            });
+
+            refreshProgressBarView();
+        });
+    </script>
+</body>
+</html>

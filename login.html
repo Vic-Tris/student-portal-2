@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Log In — Prestige Student Portal</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="./css/style.css">
+    <style>
+        .field select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            font-size: 1rem;
+            outline: none;
+            background-color: #fff;
+            transition: 0.3s;
+        }
+        .field select:focus {
+            border-color: #4caf50;
+        }
+    </style>
+    <script src="./js/nav.js" defer></script>
+</head>
+<body>
+    <script>
+        if (localStorage.getItem("isLoggedIn") === "true") {
+            alert("You are already logged in!");
+            window.location.href = "index.html";
+        }
+    </script>
+
+    <main>
+        <header class="site-header row">
+            <a href="portal.html" class="logo">
+                <img src="./images/prestige pic.jpg" alt="Prestige Coding Technology logo">
+            </a>
+            <nav id="nav" class="site-nav">
+                <ul class="row">
+                    <li><a href="portal.html">Home</a></li>
+                    <li><a href="index.html">Dashboard</a></li>
+                    <li><a href="courses.html">Courses</a></li>
+                    <li><a href="calendar.html">Calendar</a></li>
+                    <li><a href="resources.html">Resources</a></li>
+                    <li><a href="login.html" class="active" id="auth-btn">Log In</a></li>
+                </ul>
+            </nav>
+            <button id="menu" aria-label="Toggle menu"><i class="fa-solid fa-bars"></i></button>
+        </header>
+
+        <div class="auth-wrap">
+            <form class="auth-card" id="portal-login-form">
+                <h1>Welcome back</h1>
+                <p class="sub">Log in to continue learning</p>
+
+                <div class="field">
+                    <label for="user-role">Log In As</label>
+                    <select id="user-role" name="role" required>
+                        <option value="student">Student</option>
+                        <option value="tutor">Tutor</option>
+                    </select>
+                </div>
+
+                <div class="field">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" placeholder="you@example.com" required>
+                </div>
+
+                <div class="field">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" placeholder="Enter your password" required>
+                </div>
+
+                <button type="submit">Log In</button>
+
+                <p class="alt">New here? <a href="register.html">Create a student profile</a></p>
+            </form>
+        </div>
+
+        <footer>
+            <p>&copy; 2026 Prestige Coding Technology Ltd. All Rights Reserved.</p>
+        </footer>
+    </main>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const loginForm = document.getElementById("portal-login-form");
+
+            if (loginForm) {
+                loginForm.addEventListener("submit", (e) => {
+                    e.preventDefault(); // Stop native page reload loop
+
+                    const selectedRole = document.getElementById("user-role").value;
+                    
+                    // Commit active credential profiles into local persistence engine
+                    localStorage.setItem("isLoggedIn", "true");
+                    localStorage.setItem("userRole", selectedRole);
+
+                    // Optional fallback mock selection data for course rendering if they bypass registration page
+                    if (!localStorage.getItem("registeredCourses")) {
+                        localStorage.setItem("registeredCourses", JSON.stringify(["Web Development", "Data Science", "Machine Learning"]));
+                    }
+
+                    alert(`Login Successful! Welcome to your ${selectedRole} space.`);
+                    window.location.href = "index.html"; // Send straight into active main hub dashboard
+                });
+            }
+        });
+    </script>
+</body>
+</html>

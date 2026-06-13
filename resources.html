@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resources — Prestige Student Portal</title>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="./css/style.css">
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js" defer></script>
+    <script src="./js/nav.js" defer></script>
+</head>
+<body>
+    <script>
+        if (localStorage.getItem("isLoggedIn") !== "true") {
+            alert("Access Denied! Please log in to access the training resources library.");
+            window.location.href = "portal.html";
+        }
+    </script>
+
+    <main>
+        <header class="site-header row">
+            <a href="portal.html" class="logo">
+                <img src="./images/prestige pic.jpg" alt="Prestige Coding Technology logo">
+            </a>
+            <nav id="nav" class="site-nav">
+                <ul class="row">
+                    <li><a href="portal.html">Home</a></li>
+                    <li><a href="index.html">Dashboard</a></li>
+                    <li><a href="courses.html">Courses</a></li>
+                    <li><a href="calendar.html">Calendar</a></li>
+                    <li><a href="resources.html" class="active">Resources</a></li>
+                    <li><a href="login.html" id="auth-btn">Log In</a></li>
+                </ul>
+            </nav>
+            <button id="menu" aria-label="Toggle menu"><i class="fa-solid fa-bars"></i></button>
+        </header>
+
+        <div class="page-head">
+            <h1>Learning Resources</h1>
+            <p>Recordings, assignments, discussions and answers — all in one place.</p>
+        </div>
+
+        <section class="event-section" id="recordings" data-aos="fade-up">
+            <h1>Lecture Recordings</h1>
+            <div class="panel">
+                <div class="lecture-item">
+                    <h2>Data Structures Overview</h2>
+                    <div class="meta-row">
+                        <p>Recorded April 20</p>
+                        <a href="#recordings" class="view sync-activity">Watch Video</a>
+                    </div>
+                </div>
+                <div class="lecture-item">
+                    <h2>Basics of Programming</h2>
+                    <div class="meta-row">
+                        <p>Recorded April 12</p>
+                        <a href="#recordings" class="view sync-activity">Watch Video</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="event-section" id="assignments" data-aos="fade-up" data-aos-delay="100">
+            <h1>Assignments</h1>
+            <div class="panel">
+                <div class="lecture-item">
+                    <h2>Assignment 1: Build a To-Do App</h2>
+                    <div class="meta-row">
+                        <p>Due April 30</p>
+                        <div class="pdf"><span>PDF</span> <a href="#assignments" class="view sync-activity">Open</a></div>
+                    </div>
+                </div>
+                <div class="lecture-item">
+                    <h2>Assignment 2: Sorting Algorithms</h2>
+                    <div class="meta-row">
+                        <p>Due May 07</p>
+                        <div class="pdf"><span>PDF</span> <a href="#assignments" class="view sync-activity">Open</a></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="event-section" id="forum" data-aos="fade-up" data-aos-delay="200">
+            <h1>Discussion Forum</h1>
+            <div class="panel">
+                <div class="lecture-item">
+                    <h2>How do you debug recursion?</h2>
+                    <div class="meta-row">
+                        <p>12 replies</p>
+                        <a href="#forum" class="view sync-activity">Join Thread</a>
+                    </div>
+                </div>
+                <div class="lecture-item">
+                    <h2>Best resources for learning CSS Grid</h2>
+                    <div class="meta-row">
+                        <p>8 replies</p>
+                        <a href="#forum" class="view sync-activity">Join Thread</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="event-section" id="faq" data-aos="fade-up">
+            <h1>FAQ</h1>
+            <div class="panel">
+                <div class="lecture-item">
+                    <h2>How do I join a live class?</h2>
+                    <p>Open your dashboard and click "Join Meeting" on the live class card.</p>
+                </div>
+                <div class="lecture-item">
+                    <h2>Where can I find graded assignments?</h2>
+                    <p>All assignments and grades appear in the Assignments section above.</p>
+                </div>
+                <div class="lecture-item">
+                    <h2>Who do I contact for help?</h2>
+                    <p>Use the support page to reach your mentor or our support team.</p>
+                </div>
+            </div>
+        </section>
+
+        <div class="support" data-aos="zoom-in">
+            <h1>Still stuck?</h1>
+            <p><span>Need help?</span> Reach out to your mentor or our support team.</p>
+            <a href="mailto:support@prestigecoding.com" class="active">Contact Support</a>
+        </div>
+
+        <footer>
+            <p>&copy; 2026 Prestige Coding Technology Ltd. All Rights Reserved.</p>
+        </footer>
+    </main>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const authBtn = document.getElementById("auth-btn");
+
+            // 1. Navigation Auth Control
+            if (authBtn) {
+                authBtn.textContent = "Log Out";
+                authBtn.href = "#";
+                authBtn.addEventListener("click", (e) => {
+                    e.preventDefault();
+                    localStorage.removeItem("isLoggedIn");
+                    localStorage.removeItem("userRole");
+                    alert("Logged out successfully.");
+                    window.location.href = "portal.html";
+                });
+            }
+
+            // 2. Active Interactivity Progress Listener
+            document.querySelectorAll(".sync-activity").forEach(element => {
+                element.addEventListener("click", () => {
+                    let completedClicks = parseInt(localStorage.getItem("completedActivitiesCount")) || 1;
+                    if (completedClicks < 5) {
+                        completedClicks++;
+                        localStorage.setItem("completedActivitiesCount", completedClicks);
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
